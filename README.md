@@ -2,7 +2,7 @@
 A simple python script to detect and blur faces in images.
 Made using [face_recognition](https://github.com/ageitgey/face_recognition) for the heavy lift and [PyQt5](https://pypi.org/project/PyQt5/) for the GUI
 
-<img src="img/Faceblur-screenshot.png " width="300" />
+<img src="img/Faceblur-screenshot.png " width="400" />
 
 For better usability the script can be turned into a desktop app using [Fbs](https://build-system.fman.io), the only prerequisite is
 Python 3.5 or 3.6. Python 3.7 is not yet officially supported.
