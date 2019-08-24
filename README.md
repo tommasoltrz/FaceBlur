@@ -52,7 +52,9 @@ In order to make it easy to share you can create an installe by running
 
 ### Credits
 Most of this project was possible thanks to these tutorials:
+
 [fbs-tutorial](https://build-system.fman.io)
+
 [PyQt5-tutorial](https://build-system.fman.io/pyqt5-tutorial)
 
 
