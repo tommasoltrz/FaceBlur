@@ -1,3 +1,5 @@
+/target/*
+
 # IDEs and editors
 /.idea
 .project
