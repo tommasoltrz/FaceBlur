@@ -23,6 +23,7 @@ Create a virtual environment in the current directory:
 
 Activate the virtual environment:
 
+    # On MacOS
     source venv/bin/activate
 
 Install the required libraries:
@@ -55,7 +56,7 @@ If you get the error `unable to open .../your-path/shape_predictor_68_face_landm
     cp -R .../your-path//FaceBlur/venv/lib/python3.6/site-packages/face_recognition_models .../your-path/FaceBlur/target/Faceblur.app/Contents/MacOS
 
 ## Create installer
-In order to make it easy to share you can create an installe by running
+In order to make it easy to share you can create an installer by running
 
     fbs installer
 
