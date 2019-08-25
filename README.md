@@ -51,7 +51,7 @@ Test it using the command you'll get. for Mac:
 You can now see your app in the target folder
 
 ## Troubleshooting
-If you get the error `unable to open .../your-path/shape_predictor_68_face_landmarks.dat` simply copy and paste the folder `face_recognition_models folder` from your virtual environment into the app
+If you get the error `unable to open .../your-path/shape_predictor_68_face_landmarks.dat` simply copy and paste the folder `face_recognition_models` from your virtual environment into the app
 
     cp -R .../your-path//FaceBlur/venv/lib/python3.6/site-packages/face_recognition_models .../your-path/FaceBlur/target/Faceblur.app/Contents/MacOS
 
@@ -61,7 +61,7 @@ In order to make it easy to share you can create an installer by running
     fbs installer
 
 ## Credits
-Most of this project was possible thanks to these tutorials:
+Most of this project was developed these tutorials:
 
 [fbs-tutorial](https://build-system.fman.io)
 
