@@ -23,7 +23,7 @@ fastProcessingTemp = True
 blurnessTemp = 6
 
 
-# Drag and Drop Button
+# Drag and Drop Area
 class Button(QPushButton):
     def __init__(self, title, parent):
         super().__init__(title, parent)
@@ -86,8 +86,11 @@ class Form(QWidget):
 
     def initUI(self):
 
-        grid = QGridLayout()
-        self.setLayout(grid)
+
+        #####################
+        #### Main Window ####
+        #####################
+
 
         # Title
         title = QLabel('Detect and blur faces in any picture')
@@ -104,6 +107,14 @@ class Form(QWidget):
         #Drag and drop area
         dragAndDropButton = Button("",self)
 
+        # Info label
+        self.label = QLabel("")
+        self.label.setText("Drag and drop or manually select images")
+        self.label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setStyleSheet("QLabel {background-color: transparent; font-size: 15px; color:white}")
+        self.label.setFixedHeight(60)
+
         # Upload Button
         button = QPushButton('Select Images')
         button.setSizePolicy(QtWidgets.QSizePolicy.Expanding,QtWidgets.QSizePolicy.Preferred)
@@ -114,38 +125,28 @@ class Form(QWidget):
         button2.setSizePolicy(QtWidgets.QSizePolicy.Expanding,QtWidgets.QSizePolicy.Preferred)
         button2.setStyleSheet('QPushButton {border:1px solid rgb(113, 195 , 148); max-height: 35px; color: rgb(113,195,148);}' 'QPushButton:pressed {background-color: rgb(113,195,148); color: rgb(52,50,49)}')
 
+        # Create main window layout
+        grid = QGridLayout()
+        self.setLayout(grid)
+
+
+        # Add Widgets to grid
+        grid.addWidget(title,0,0, 1 , 7)
+        grid.addWidget(settingsButton,0,7, 1 ,1)
+        grid.addWidget(dragAndDropButton,1,0, 1 ,8) #Logo
+        grid.addWidget(self.label, 2,0, 1 ,8)
+        grid.addWidget(button, 3, 0, 1, 4)
+        grid.addWidget(button2, 3, 4, 1, 4)
+
+        ###############
+        #### Modal ####
+        ###############
+
         # Efficiency label 
         Efficiency = QLabel(self)
         Efficiency.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         Efficiency.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55); margin-top: 30px}')
         Efficiency.setText("Efficiency")
-
-        # HOC Button
-        toggle1 = QPushButton('Faster')
-        toggle1.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
-        toggle1.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38);color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}')
-        toggle1.setFixedHeight(35)
-
-        # CNN Button
-        toggle2 = QPushButton('More Accurate')
-        toggle2.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
-        toggle2.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 80); background-color:transparent; font-size: 10px}')
-        toggle2.setFixedHeight(35)
-
-
-        # Spacer Label
-        Spacer = QLabel(self)
-        Spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        Spacer.setStyleSheet('background-color: rgb(55,55,55)')
-        Spacer.setText("")
-
-
-        # Blur Intensity Label
-        Blurlabel = QLabel(self)
-        Blurlabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        Blurlabel.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55)')
-        Blurlabel.setText("Blur Intensity")
-        Blurlabel.setFixedHeight(20)
 
         # Slider -  Low
         Sliderlabel1 = QLabel(self)
@@ -162,21 +163,36 @@ class Form(QWidget):
         slider.setSingleStep(1)
         slider.setValue(blurness)
 
+        # Blur Intensity Label
+        Blurlabel = QLabel(self)
+        Blurlabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        Blurlabel.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55)')
+        Blurlabel.setText("Blur Intensity")
+        Blurlabel.setFixedHeight(20)
+
         # Slider - High
         Sliderlabel2 = QLabel(self)
         Sliderlabel2.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         Sliderlabel2.setStyleSheet('QLabel {font-size: 12px; color: rgba(255,255,255,180); background-color: rgb(55,55,55)}')
         Sliderlabel2.setText("High")
 
-        
-        # Info label
-        self.label = QLabel("")
-        self.label.setText("Drag and drop or manually select images")
-        self.label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setStyleSheet("QLabel {background-color: transparent; font-size: 15px; color:white}")
-        self.label.setFixedHeight(60)
+        # HOC Button
+        toggle1 = QPushButton('Faster')
+        toggle1.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
+        toggle1.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38);color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}')
+        toggle1.setFixedHeight(35)
 
+        # CNN Button
+        toggle2 = QPushButton('More Accurate')
+        toggle2.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
+        toggle2.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 80); background-color:transparent; font-size: 10px}')
+        toggle2.setFixedHeight(35)
+
+        # Spacer Label
+        Spacer = QLabel(self)
+        Spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        Spacer.setStyleSheet('background-color: rgb(55,55,55)')
+        Spacer.setText("")
 
         # Close Modal Button
         closeButton = QPushButton('CANCEL')
@@ -190,24 +206,7 @@ class Form(QWidget):
         saveButton.setStyleSheet('QPushButton {border: 1px solid rgb(113, 195 , 148); color: rgb(113, 195 , 148); font-size: 12px; background-color: transparent}' 'QPushButton:pressed {color: rgba(55,55,55,255); background-color: rgb(113, 195 , 148)}')
         saveButton.setFixedHeight(25)
 
-
-        # Add Widgets to grid
-        grid.addWidget(title,0,0, 1 , 7)
-        grid.addWidget(settingsButton,0,7, 1 ,1)
-        grid.addWidget(dragAndDropButton,1,0, 1 ,8) #Logo
-        grid.addWidget(self.label, 2,0, 1 ,8)
-        grid.addWidget(button, 3, 0, 1, 4)
-        grid.addWidget(button2, 3, 4, 1, 4)
-
-
-        # Manage App Window
-        self.move(100, 100)
-        self.setWindowTitle('Faceblur')
-        self.setFixedSize(400, 350)
-        self.setStyleSheet("QWidget {background-color:rgb(52,50,49);}")
-        self.show()
-
-        # Create Modal
+        # Create Modal Layout
         my_dialog = QDialog(self) 
         my_dialog.setModal(True)
         my_dialog.setFixedSize(250, 300)
@@ -231,7 +230,21 @@ class Form(QWidget):
         modalGrid.addWidget(closeButton, 5,0,1,3)
         modalGrid.addWidget(saveButton, 5,3,1,3)
 
+        ##########################
+        #### Show Main Window ####
+        ##########################
 
+        # Manage App Window
+        self.move(100, 100)
+        self.setWindowTitle('Faceblur')
+        self.setFixedSize(400, 350)
+        self.setStyleSheet("QWidget {background-color:rgb(52,50,49);}")
+        self.show()
+
+
+        ########################
+        #### Buttons events ####
+        ########################
 
         def closeModal():
             my_dialog.close()
@@ -297,7 +310,7 @@ class Form(QWidget):
             global blurnessTemp
             blurnessTemp = slider.value()
 
-        # Button events
+        # Connects Events to Buttons
         button.clicked.connect(uploadImages)
         button2.clicked.connect(startProcessing)
         toggle1.clicked.connect(HOGpressed)
@@ -306,7 +319,6 @@ class Form(QWidget):
         settingsButton.clicked.connect(openModal)
         closeButton.clicked.connect(closeModal)
         saveButton.clicked.connect(saveModal)
-
 
 
     def onIntReady(self, i):
@@ -327,7 +339,7 @@ class Worker(QObject):
             self.intReady.emit(str(index) + ' of ' + str(len(lst)) + ' images processed')
             index = index + 1
             filename = i
-            img = Image.open(filename).convert('RGB')
+            img = Image.open(filename)
 
             if img is None:
                 print("Could not read input image")
@@ -374,7 +386,7 @@ class Worker(QObject):
 
 
             file_name, file_extension = os.path.splitext(i)
-            img.save(str(file_name) + '_blurred.jpeg', 'jpeg')
+            img.save(str(file_name) + '_blurred' + file_extension)
         self.intReady.emit('Image processing completed')
         self.finished.emit()
         lst = []

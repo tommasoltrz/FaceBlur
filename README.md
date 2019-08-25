@@ -7,7 +7,16 @@ Made using [face_recognition](https://github.com/ageitgey/face_recognition) for 
 For better usability the script can be turned into a desktop app using [Fbs](https://build-system.fman.io), the only prerequisite is
 Python 3.5 or 3.6. Python 3.7 is not yet officially supported.
 
+
 ## Setup
+Open the terminal and clone this repo:
+
+    git clone https://github.com/tommasoltrz/FaceBlur.git
+
+move into the repo directory:
+
+    cd FaceBlur
+
 Create a virtual environment in the current directory:
 
     python3 -m venv venv
@@ -18,7 +27,7 @@ Activate the virtual environment:
 
 Install the required libraries:
 
-    pip install fbs PyQt5==5.9.2 Pillow numpy face_recognition
+    pip3 install fbs PyQt5==5.9.2 Pillow numpy face_recognition
 
 ## Run the script
 You can either directly run the script:
@@ -50,7 +59,7 @@ In order to make it easy to share you can create an installe by running
 
     fbs installer
 
-### Credits
+## Credits
 Most of this project was possible thanks to these tutorials:
 
 [fbs-tutorial](https://build-system.fman.io)
