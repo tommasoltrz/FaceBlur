@@ -63,7 +63,7 @@ In order to make it easy to share you can create an installer by running
     fbs installer
 
 ## Credits
-Most of this project was developed these tutorials:
+Most of this project was developed following these tutorials:
 
 [fbs-tutorial](https://build-system.fman.io)
 
