@@ -7,6 +7,8 @@ Made using [face_recognition](https://github.com/ageitgey/face_recognition) for 
 For better usability the script can be turned into a desktop app using [Fbs](https://build-system.fman.io), the only prerequisite is
 Python 3.5 or 3.6. Python 3.7 is not yet officially supported.
 
+This project is meant as a design research tool to speed up the process of blurring faces and being GDPR compliant.
+
 
 ## Setup
 Open the terminal and clone this repo:
