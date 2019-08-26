@@ -18,9 +18,9 @@ import numpy.random.entropy
 
 lst = []
 fastProcessing = True
-blurness = 6
+blurness = 30
 fastProcessingTemp = True
-blurnessTemp = 6
+blurnessTemp = 30
 
 
 # Drag and Drop Area
@@ -53,7 +53,7 @@ class Button(QPushButton):
             for i in range(len(m.urls())):
                 print(m.urls()[i].toLocalFile())
                 filename, file_extension = os.path.splitext(m.urls()[i].toLocalFile())
-                if '.jpg' in str(file_extension) or '.png' in str(file_extension) or '.jpeg' in str(file_extension) :
+                if '.jpg' in str(file_extension) or '.png' in str(file_extension) or '.jpeg' in str(file_extension) or '.JPG' in str(file_extension) or '.PNG' in str(file_extension):
                     global lst
                     lst.extend([m.urls()[i].toLocalFile()]) 
             self.parent().label.setText(str(len(lst)) + ' images selected')
@@ -157,10 +157,10 @@ class Form(QWidget):
         # Slider -  Bar
         slider = QtWidgets.QSlider()
         slider.setOrientation(QtCore.Qt.Horizontal)
-        slider.setMaximum(10)
+        slider.setMaximum(40)
         slider.setTickPosition(QSlider.TicksBothSides)
-        slider.setTickInterval(1)
-        slider.setSingleStep(1)
+        slider.setTickInterval(5)
+        slider.setSingleStep(5)
         slider.setValue(blurness)
 
         # Blur Intensity Label
