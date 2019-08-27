@@ -22,6 +22,8 @@ blurness = 30
 fastProcessingTemp = True
 blurnessTemp = 30
 
+pixelize = True
+
 
 # Drag and Drop Area
 class Button(QPushButton):
@@ -142,11 +144,30 @@ class Form(QWidget):
         #### Modal ####
         ###############
 
-        # Efficiency label 
-        Efficiency = QLabel(self)
-        Efficiency.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        Efficiency.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55); margin-top: 30px}')
-        Efficiency.setText("Efficiency")
+        # Effect label 
+        Effect = QLabel(self)
+        Effect.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        Effect.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55);}')
+        Effect.setText("Effect")
+
+        # togglePixelize
+        togglePixelize = QPushButton('Pixelize')
+        togglePixelize.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
+        togglePixelize.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38);color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}')
+        togglePixelize.setFixedHeight(35)
+
+        # toggleGausBlur
+        toggleGausBlur = QPushButton('Blur')
+        toggleGausBlur.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.Preferred)
+        toggleGausBlur.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 80); background-color:transparent; font-size: 10px}')
+        toggleGausBlur.setFixedHeight(35)
+
+
+        # Blur Intensity Label
+        Blurlabel = QLabel(self)
+        Blurlabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        Blurlabel.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55); margin-top: 30px')
+        Blurlabel.setText("Blur Intensity")
 
         # Slider -  Low
         Sliderlabel1 = QLabel(self)
@@ -163,18 +184,17 @@ class Form(QWidget):
         slider.setSingleStep(5)
         slider.setValue(blurness)
 
-        # Blur Intensity Label
-        Blurlabel = QLabel(self)
-        Blurlabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        Blurlabel.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55)')
-        Blurlabel.setText("Blur Intensity")
-        Blurlabel.setFixedHeight(20)
-
         # Slider - High
         Sliderlabel2 = QLabel(self)
         Sliderlabel2.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         Sliderlabel2.setStyleSheet('QLabel {font-size: 12px; color: rgba(255,255,255,180); background-color: rgb(55,55,55)}')
         Sliderlabel2.setText("High")
+
+        # Efficiency label 
+        Efficiency = QLabel(self)
+        Efficiency.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        Efficiency.setStyleSheet('font-size: 14px; color: rgba(255,255,255,255); background-color: rgb(55,55,55); margin-top: 30px}')
+        Efficiency.setText("Efficiency")
 
         # HOC Button
         toggle1 = QPushButton('Faster')
@@ -209,7 +229,7 @@ class Form(QWidget):
         # Create Modal Layout
         my_dialog = QDialog(self) 
         my_dialog.setModal(True)
-        my_dialog.setFixedSize(250, 300)
+        my_dialog.setFixedSize(250, 400)
         my_dialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         modalGrid = QGridLayout()
         modalGrid.setVerticalSpacing(15)
@@ -219,16 +239,22 @@ class Form(QWidget):
         my_dialog.dragging_threshould = 5
 
         # Add Widgets to Modal
-        modalGrid.addWidget(Blurlabel, 0, 0, 1 ,6)
-        modalGrid.addWidget(Sliderlabel1, 1, 0, 1, 1)
-        modalGrid.addWidget(slider, 1, 1, 1 ,4)
-        modalGrid.addWidget(Sliderlabel2, 1, 5, 1, 1)
-        modalGrid.addWidget(Efficiency, 2, 0, 1 ,6)
-        modalGrid.addWidget(toggle1, 3, 0, 1, 3)
-        modalGrid.addWidget(toggle2, 3, 3, 1, 3)
-        modalGrid.addWidget(Spacer, 4, 0, 1, 6)
-        modalGrid.addWidget(closeButton, 5,0,1,3)
-        modalGrid.addWidget(saveButton, 5,3,1,3)
+        modalGrid.addWidget(Effect, 0, 0, 1 ,6)
+        modalGrid.addWidget(togglePixelize, 1, 0, 1, 3)
+        modalGrid.addWidget(toggleGausBlur, 1, 3, 1, 3)
+
+        modalGrid.addWidget(Blurlabel, 2, 0, 1 ,6)
+        modalGrid.addWidget(Sliderlabel1, 3, 0, 1, 1)
+        modalGrid.addWidget(slider, 3, 1, 1 ,4)
+        modalGrid.addWidget(Sliderlabel2, 3, 5, 1, 1)
+
+        modalGrid.addWidget(Efficiency, 4, 0, 1 ,6)
+        modalGrid.addWidget(toggle1, 5, 0, 1, 3)
+        modalGrid.addWidget(toggle2, 5, 3, 1, 3)
+
+        modalGrid.addWidget(Spacer, 6, 0, 1, 6)
+        modalGrid.addWidget(closeButton, 7,0,1,3)
+        modalGrid.addWidget(saveButton, 7,3,1,3)
 
         ##########################
         #### Show Main Window ####
@@ -306,6 +332,19 @@ class Form(QWidget):
             toggle1.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 80);  background-color: transparent; font-size: 10px}')
             toggle2.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}')
 
+        def PixelizePressed():
+            global pixelize
+            pixelize = True
+            togglePixelize.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38);  color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}' )
+            toggleGausBlur.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38);  color: rgba(255, 255 , 255, 80); background-color: transparent; font-size: 10px}' )
+
+
+        def GausBlurPressed():
+            global pixelize
+            pixelize = False
+            togglePixelize.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 80);  background-color: transparent; font-size: 10px}')
+            toggleGausBlur.setStyleSheet('QPushButton {border:1px solid rgb(40,39,38); color: rgba(255, 255 , 255, 255); background-color: rgb(40,39,38); font-size: 10px}')
+
         def setBlur():
             global blurnessTemp
             blurnessTemp = slider.value()
@@ -315,6 +354,8 @@ class Form(QWidget):
         button2.clicked.connect(startProcessing)
         toggle1.clicked.connect(HOGpressed)
         toggle2.clicked.connect(CNNpressed)
+        togglePixelize.clicked.connect(PixelizePressed)
+        toggleGausBlur.clicked.connect(GausBlurPressed)
         slider.sliderReleased.connect(setBlur)
         settingsButton.clicked.connect(openModal)
         closeButton.clicked.connect(closeModal)
@@ -361,28 +402,42 @@ class Worker(QObject):
                 # Crop square around the face
                 cropped_image = img.crop((x,y,x+w,y+h))
 
-                # Blur it
-                global blurness
-                blurred_image = cropped_image.filter(ImageFilter.GaussianBlur(radius=blurness))
+                global pixelize, blurness
+                if (pixelize):
+                    # Get level of blur
+                    pixelizeIntensity = round(mapValueToRange(blurness, 0, 40, 32, 8))
 
-                # Open the input image as numpy array
-                npImage=np.array(blurred_image)
-                q,t=blurred_image.size
+                    # Resize smoothly down to 16x16 pixels
+                    imgSmall = cropped_image.resize((pixelizeIntensity, pixelizeIntensity),resample=Image.BILINEAR)
 
-                # Create same size alpha layer with circle
-                alpha = Image.new('L', blurred_image.size,0)
-                draw = ImageDraw.Draw(alpha)
-                draw.pieslice([0,0,q,t],0,360,fill=255) 
+                    # Scale back up using NEAREST to original size
+                    blurred_image = imgSmall.resize(cropped_image.size,Image.NEAREST)
 
-                # Convert alpha Image to numpy array
-                npAlpha=np.array(alpha)
+                    # Paste cropped image over original
+                    img.paste(blurred_image, (x,y))
 
-                # Add alpha layer to RGB
-                npImage=np.dstack((npImage,npAlpha))
-                final_crop = Image.fromarray(npImage)
+                else:
+                    # Blur it
+                    blurred_image = cropped_image.filter(ImageFilter.GaussianBlur(radius=blurness))
+
+                    # Open the input image as numpy array
+                    npImage=np.array(blurred_image)
+                    q,t=blurred_image.size
+
+                    # Create same size alpha layer with circle
+                    alpha = Image.new('L', blurred_image.size,0)
+                    draw = ImageDraw.Draw(alpha)
+                    draw.pieslice([0,0,q,t],0,360,fill=255) 
+
+                    # Convert alpha Image to numpy array
+                    npAlpha=np.array(alpha)
+
+                    # Add alpha layer to RGB
+                    npImage=np.dstack((npImage,npAlpha))
+                    final_crop = Image.fromarray(npImage)
                 
-                # Paste cropped image over original
-                img.paste(final_crop, (x,y), final_crop)
+                    # Paste cropped image over original
+                    img.paste(final_crop, (x,y), final_crop)
 
 
             file_name, file_extension = os.path.splitext(i)
@@ -391,6 +446,15 @@ class Worker(QObject):
         self.finished.emit()
         lst = []
 
+
+def mapValueToRange(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
 
 
 appctxt = ApplicationContext()
